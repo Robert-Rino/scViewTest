@@ -1,0 +1,72 @@
+extends layout
+
+block content
+  h2 Modal Example
+      button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') Open Modal
+  
+      // layer 1 modal
+      #myModal.modal.fade(role='dialog')
+        .modal-dialog
+
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal') &times;
+
+              h4.modal-title Modal Header
+
+            .modal-body
+              each val,index in data.keywords
+                a.btn.btn-default(data-toggle='modal', data-target='#myModal'+index) #{val.name} 
+                br
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Close
+      
+      //content modal
+      each val,index in data.keywords
+        .modal.fade(id='myModal'+index ,role='dialog')
+          .modal-dialog
+        
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal') x
+        
+                h4.modal-title Modal Header
+        
+              .modal-body
+                iframe(src=val.url width="100%" style="height: 100vh" allowfullscreen)
+              
+              .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal') Close
+                
+    //- a.fancybox.fancybox.iframe(href="http://www.youtube.com/embed/L9szn1QQfas?enablejsapi=1&wmode=opaque") Video #1   
+  a.fancybox(class='fancybox.iframe', href='http://www.youtube.com/embed/L9szn1QQfas?enablejsapi=1&wmode=opaque') Video #1
+  
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.css')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.js')
+  script(src="http://www.youtube.com/player_api")
+  script.
+    function onYouTubePlayerAPIReady() {
+      $(document).ready(function() {
+        $(".fancybox")
+           .attr('rel', 'gallery')
+           .fancybox({
+               openEffect  : 'none',
+               closeEffect : 'none',
+               nextEffect  : 'none',
+               prevEffect  : 'none',
+               padding     : 0,
+               margin      : 50,
+               beforeShow  : function() {
+                 var id = $.fancybox.inner.find('iframe').attr('id');
+                 var player = new YT.Player(id, {
+                        events: {
+                            'onReady': onPlayerReady,
+                            'onStateChange': onPlayerStateChange
+                        }
+                    });
+               }
+      });
+      console.log('hello');  
+    });
+      
+                 
