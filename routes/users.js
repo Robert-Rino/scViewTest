@@ -8,14 +8,12 @@ var helper = require('../lib/helper.js');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/:chapter/:lecture', function (req, res, next) {
+router.get('/', function (req, res, next) {
   //    Run python
   //   PythonShell.run('script/hello.py', function (err) {
   //   if (err) throw err;
   //   console.log('finished');
   // });
-  var reqChapter = req.params.chapter;
-  var reqLecture = req.params.lecture;
   var content = [];
   csv
    .fromPath('playgroung/v_chapter_video.csv')
