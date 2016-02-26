@@ -3,7 +3,6 @@ var PythonShell = require('python-shell');
 var csv = require('fast-csv');
 var $ = require('cheerio');
 var _ = require('lodash');
-var test = require('../lib/greeting.js');
 var helper = require('../lib/helper.js');
 var router = express.Router();
 
@@ -40,17 +39,15 @@ router.get('/', function (req, res, next) {
          if (_.indexOf(chapterOrder, chapterTmp) != -1) {// already in chapterOrder array
            vidArr[chapterIndex].push(content[index][4]);
            vHashArr[chapterIndex].push(helper.getYoutubeHash(urlsTmp));
-          //  console.log('old');
          }else {
            chapterIndex++;
-          //  console.log('===new' + chapterIndex + content[index][4]);
            chapterOrder.push(chapterTmp);
            vidArr.push(Array(content[index][4]));
            vHashArr.push(Array(helper.getYoutubeHash(urlsTmp)));
          }
        }
-      //  vidArr.push(content[index][4]);
      }
+
      console.log(vidArr.length);
      res.send(vHashArr);
    });
