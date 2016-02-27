@@ -7,7 +7,7 @@ var helper = require('../lib/helper.js');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
+router.get('/chapterInfo', function (req, res, next) {
   //    Run python
   //   PythonShell.run('script/hello.py', function (err) {
   //   if (err) throw err;
