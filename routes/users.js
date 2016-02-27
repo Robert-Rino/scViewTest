@@ -30,25 +30,26 @@ router.get('/', function (req, res, next) {
      for (var index = 0; index < content.length; index++) {
        var chapterTmp = parseInt(content[index][2]); //current chapte in iteration
        var urlsTmp = content[index][6];
+       var lectureName = content[index][5];
        if (isInitial == 1) {
          isInitial = 0;
          chapterOrder.push(chapterTmp);
          vidArr.push(Array(content[index][4]));
-         vHashArr.push(Array(helper.getYoutubeHash(urlsTmp)));
+         vHashArr.push(Array({ vhash:helper.getYoutubeHash(urlsTmp), vname:lectureName }));
        }else {// if not initial
          if (_.indexOf(chapterOrder, chapterTmp) != -1) {// already in chapterOrder array
            vidArr[chapterIndex].push(content[index][4]);
-           vHashArr[chapterIndex].push(helper.getYoutubeHash(urlsTmp));
+           vHashArr[chapterIndex].push({ vhash:helper.getYoutubeHash(urlsTmp), vname:lectureName });
          }else {
            chapterIndex++;
            chapterOrder.push(chapterTmp);
            vidArr.push(Array(content[index][4]));
-           vHashArr.push(Array(helper.getYoutubeHash(urlsTmp)));
+           vHashArr.push(Array({ vhash:helper.getYoutubeHash(urlsTmp), vname:lectureName }));
          }
        }
      }
 
-     console.log(vidArr.length);
+    //  console.log(vidArr.length);
      res.send(vHashArr);
    });
 
