@@ -3,6 +3,7 @@ var PythonShell = require('python-shell');
 var csv = require('fast-csv');
 var $ = require('cheerio');
 var _ = require('lodash');
+var shell = require('shelljs');
 var helper = require('../lib/helper.js');
 var router = express.Router();
 
@@ -53,6 +54,12 @@ router.get('/chapterInfo', function (req, res, next) {
      res.send(vHashArr);
    });
 
+});
+
+router.get('/runPython', function (req, res) {
+  shell.echo('hello world');
+  shell.exec('python playgroung/test.py');
+  res.send(200);
 });
 
 module.exports = router;
