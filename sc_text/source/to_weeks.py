@@ -3,12 +3,12 @@ import csv,os
 #chapter_video_dir is dump from mysql v_chapter_video table
 #format is
 #cid,chid,chapter_order,content-order,vid,v_name
-chapter_video_dir = '../video_file/v_chapter_video.csv'
+chapter_video_dir = '/Users/robert/Repository/scViewTest/sc_text/video_file/v_chapter_video.csv'
 #in_file_path is dumpform mongodb format is
 #userId,videoStartTime,videoEndTime,videoTotalTime,videoId,time
-in_file_path = '../video_file/video_record_12_7_filtered.csv'
+in_file_path = '/Users/robert/Repository/scViewTest/sc_text/video_file/video_record_12_7_filtered.csv'
 # out_dir = './weeks_filtered/week3/'
-out_path = '../to_weeks'
+out_path = '/Users/robert/Repository/scViewTest/sc_text/to_weeks'
 
 if not os.path.exists(out_path):
     os.makedirs(out_path)

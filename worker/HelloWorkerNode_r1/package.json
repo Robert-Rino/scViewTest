@@ -1,0 +1,15 @@
+{
+  "name": "sc-worker",
+  "version": "1.0.0",
+  "description": "worker for calling sc text record calculation",
+  "main": "hello_worker.js",
+  "dependencies": {
+    "request": "^2.69.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rino",
+  "license": "ISC"
+}

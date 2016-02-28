@@ -58,8 +58,8 @@ router.get('/chapterInfo', function (req, res, next) {
 
 router.get('/runPython', function (req, res) {
   shell.echo('hello world');
-  shell.exec('python playgroung/test.py');
-  res.send(200);
+  // shell.exec('sc_text/source/trigger.sh');
+  res.sendStatus(200);
 });
 
 module.exports = router;
