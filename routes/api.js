@@ -4,6 +4,8 @@ var csv = require('fast-csv');
 var $ = require('cheerio');
 var _ = require('lodash');
 var shell = require('shelljs');
+var fs = require('fs');
+var path = require('path');
 var helper = require('../lib/helper.js');
 var router = express.Router();
 
@@ -60,6 +62,18 @@ router.get('/runPython', function (req, res) {
   shell.echo('hello world');
   // shell.exec('sc_text/source/trigger.sh');
   res.sendStatus(200);
+});
+
+router.get('/getCloudData/:chid', function (req, res, err) {
+  var chid = req.params.chid;
+  var data = JSON.parse(fs.readFileSync('./playgroung/chapter-728-done.txt','utf8'));
+  var chapterOrder = String(data[chid]);
+  try {
+    var returnData = JSON.parse(fs.readFileSync('./playgroung/hot_word/'+chapterOrder+'.txt','utf8'));
+    res.send(200,returnData);
+  } catch(e){
+    res.sendStatus(204);
+  }
 });
 
 module.exports = router;
