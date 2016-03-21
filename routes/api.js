@@ -66,12 +66,12 @@ router.get('/runPython', function (req, res) {
 
 router.get('/getCloudData/:chid', function (req, res, err) {
   var chid = req.params.chid;
-  var data = JSON.parse(fs.readFileSync('./playgroung/chapter-728-done.txt','utf8'));
+  var data = JSON.parse(fs.readFileSync('./playgroung/chapter-728-done.txt', 'utf8'));
   var chapterOrder = String(data[chid]);
   try {
-    var returnData = JSON.parse(fs.readFileSync('./playgroung/hot_word/'+chapterOrder+'.txt','utf8'));
-    res.send(200,returnData);
-  } catch(e){
+    var returnData = JSON.parse(fs.readFileSync('./playgroung/hot_word/' + chapterOrder + '.txt', 'utf8'));
+    res.send(200, returnData);
+  } catch (e) {
     res.sendStatus(204);
   }
 });
