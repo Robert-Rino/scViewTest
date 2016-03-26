@@ -59,9 +59,18 @@ router.get('/chapterInfo', function (req, res, next) {
 });
 
 router.get('/runPython', function (req, res) {
-  shell.echo('hello world');
+  // shell.echo('hello world');
   // shell.exec('sc_text/source/trigger.sh');
-  res.sendStatus(200);
+  PythonShell.run('playgroung/sc_text/source/test.py', function (err) {
+  if (err) {
+    console.log(err);
+    return;
+  }
+
+  console.log('finished');
+});
+
+  res.status(200).send('hello im runPython');
 });
 
 router.get('/getCloudData/:chid', function (req, res, err) {
