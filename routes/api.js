@@ -1,6 +1,7 @@
 var express = require('express');
 var PythonShell = require('python-shell');
-var csv = require('fast-csv');
+// var csv = require('fast-csv');
+var parse = require('csv-parse');
 var $ = require('cheerio');
 var _ = require('lodash');
 var shell = require('shelljs');
@@ -61,7 +62,7 @@ router.get('/chapterInfo', function (req, res, next) {
 router.get('/runPython', function (req, res) {
   // shell.echo('hello world');
   shell.exec(path.join(__dirname, '..', 'playgroung', 'sc_text', 'source', 'trigger.sh'));
-  res.status(200).send('hello im runPython');
+  res.status(200).send(__dirname);
 });
 
 router.get('/getCloudData/:chid', function (req, res, err) {
@@ -74,6 +75,19 @@ router.get('/getCloudData/:chid', function (req, res, err) {
   } catch (e) {
     res.sendStatus(204);
   }
+});
+
+router.get('/readCsvTest', function (req, res) {
+  // shell.echo('hello world');
+  var inpath = path.join(__dirname, '..', 'playgroung', 'sc_text', 'to_weeks_preprocessed', '1', '1.csv');
+  var fileContent = fs.readFileSync(inpath, 'utf8');
+  parse(fileContent, (err, output) => {
+    if (err) {
+      return err;
+    }
+
+    res.status(200).send(output);
+  });
 });
 
 module.exports = router;
