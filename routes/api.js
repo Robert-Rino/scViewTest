@@ -1,6 +1,8 @@
 var express = require('express');
 var PythonShell = require('python-shell');
 // var csv = require('fast-csv');
+var csv = require('csv');
+var stringify = require('csv-stringify');
 var parse = require('csv-parse');
 var $ = require('cheerio');
 var _ = require('lodash');
@@ -77,16 +79,29 @@ router.get('/getCloudData/:chid', function (req, res, err) {
   }
 });
 
-router.get('/readCsvTest', function (req, res) {
+router.get('/readAndWriteCsvTest', function (req, res) {
   // shell.echo('hello world');
-  var inpath = path.join(__dirname, '..', 'playgroung', 'sc_text', 'to_weeks_preprocessed', '1', '1.csv');
+  var inpath = path.join(__dirname, '..', 'playgroung', 'sc_text', 'to_weeks_preprocessed', '1', '0.csv');
   var fileContent = fs.readFileSync(inpath, 'utf8');
-  parse(fileContent, (err, output) => {
+  parse(fileContent, (err, csvArr) => {
     if (err) {
-      return err;
+      console.log(err);
+      throw err;
     }
 
-    res.status(200).send(output);
+    stringify(csvArr, function (err, output) {
+      if (err) {
+        throw err;
+      }
+
+      fs.writeFile('testCsvOut.csv', output, function (err) {
+        if (err) {
+          throw err;
+        }
+
+        res.sendStatus(200);
+      });
+    });
   });
 });
 
