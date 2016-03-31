@@ -70,8 +70,9 @@ router.get('/runPython', function (req, res) {
   // res.status(200).send(__dirname);
   var pathName = path.join(__dirname, '..', 'playgroung', 'sc_text', 'source', 'generateHotKeyword.py');
   // exec('python3' + pathName, function (err, stdout, stderr) {
-  childProcess.execSync('mkdir testFileDic');
-  res.sendStatus(200);
+  childProcess.exec('python3 ' + pathName, function (err, stdout, stderr) {
+    res.sendStatus(200);
+  });
 });
 
 router.get('/getCloudData/:chid', function (req, res, err) {
